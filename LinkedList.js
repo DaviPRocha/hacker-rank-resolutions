@@ -11,17 +11,17 @@ class LinkedList{
             value: val,
             next: null
         }
-        let current = this.head
-        if (current !== null){
-            for(let j = 0; j < i; j++) {
-                current = current.next
-            }
-            if (current !== null) {
-                node.next = current.next
-                current.next = node
-            }
+        let current = null
+        for(let j = 0; j < i; j++) {
+            if (current === null) current = this.head
+            else current = current.next
+        }
+        if (current !== null) {
+            node.next = current.next
+            current.next = node
         } else {
-            this.head = node
+            if (this.head !== null) current.next = this.head
+            this.head = current
         }
     }
     print() {
@@ -39,7 +39,7 @@ const x = new LinkedList()
 
 x.insert(2, 0)
 x.print()
-x.insert(3, 1)
+x.insert(3, 0)
 x.print()
 x.insert(1, 0)
 x.print()
